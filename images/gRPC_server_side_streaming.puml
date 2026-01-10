@@ -1,0 +1,25 @@
+@startuml
+
+!theme mono
+scale 1.1
+hide footbox
+title gRPC server-side streaming
+skinparam TitleFontStyle plain
+skinparam TitleFontSize 14
+skinparam sequenceMessageAlign center
+
+participant client
+participant server
+
+client ->>(5) server: stub.serverStreamingEcho(request)
+
+alt success
+    server ->>(5) client: responseObserver.onNext(response)
+    server ->>(5) client: responseObserver.onNext(response)
+    server ->>(5) client: responseObserver.onNext(response)
+    server ->>(5) client: responseObserver.onCompleted()
+else failure
+    server ->>(5) client: responseObserver.onError(throwable)
+end
+
+@enduml

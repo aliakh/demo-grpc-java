@@ -1,0 +1,54 @@
+@startuml
+
+!theme mono
+scale 1.1
+title gRPC workflow
+skinparam TitleFontStyle plain
+skinparam TitleFontSize 14
+skinparam defaultTextAlignment center
+skinparam linetype ortho
+skinparam ranksep 30
+
+rectangle "client" as client5
+rectangle "channel" as client4
+rectangle "client stub" as client3
+rectangle "gRPC runtime" as client2
+rectangle "transport" as client1
+
+rectangle "server" as server5
+rectangle "service" as server4
+rectangle "service stub" as server3
+rectangle "gRPC runtime" as server2
+rectangle "transport" as server1
+
+rectangle "ProtoBuf" as protobuf
+rectangle "HTTP/2" as http
+
+client5 -d- client4
+client4 -d- client3
+client3 -d- client2
+client2 -[hidden]d- client1
+client2 -d- client1
+client2 -[hidden]d- client1
+client2 -[hidden]d- client1
+client2 -[hidden]d- client1
+client2 -[hidden]d- client1
+client2 -[hidden]d- client1
+
+server5 -d- server4
+server4 -d- server3
+server3 -d- server2
+server2 -[hidden]d- server1
+server2 -d- server1
+server2 -[hidden]d- server1
+server2 -[hidden]d- server1
+server2 -[hidden]d- server1
+server2 -[hidden]d- server1
+
+client3 -[dotted]r- protobuf
+protobuf -[dotted]r- server3
+
+client1 -r- http
+http -r- server1
+
+@enduml

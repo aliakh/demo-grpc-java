@@ -1,0 +1,29 @@
+@startuml
+
+!theme mono
+scale 1.1
+hide footbox
+title Remote Procedure Call (RPC)
+skinparam TitleFontStyle plain
+skinparam TitleFontSize 14
+skinparam sequenceMessageAlign center
+
+activate client
+note left of client: invoke procedure
+client ->> server : procedure call
+deactivate client
+activate server
+
+note right of server: receive parameters
+note right of server: execute procedure
+note right of server: send result
+
+server ->> client : result from procedure execution
+deactivate server
+activate client
+note left of client: receive result
+
+||20||
+'client -[#white]->]
+
+@enduml
